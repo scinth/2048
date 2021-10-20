@@ -48,6 +48,10 @@ const handleKeydown = function (e) {
 	if (resolving) return;
 	resolving = true;
 	let direction = getDirection(e.key);
+	if (direction == 'invalid') {
+		resolving = false;
+		return;
+	}
 	let newState = resolveBoard(BOARD, direction);
 	if (JSON.stringify(BOARD) == JSON.stringify(newState.newBoard)) {
 		resolving = false;
@@ -57,6 +61,59 @@ const handleKeydown = function (e) {
 	updateState(newState);
 	e.stopPropagation();
 };
+
+const getSwipeDirection = function (xCoords, yCoords) {
+	let xSwipe = xCoords[0] - yCoords[0];
+	let ySwipe = xCoords[1] - yCoords[1];
+	if (xSwipe == 0 && ySwipe == 0) return 'invalid';
+	let swipe =
+		Math.abs(xSwipe) > Math.abs(ySwipe)
+			? {
+					value: xSwipe,
+					axis: ['left', 'right'],
+			  }
+			: {
+					value: ySwipe,
+					axis: ['up', 'down'],
+			  };
+	let direction = swipe.value > 0 ? swipe.axis[0] : swipe.axis[1];
+	return direction;
+};
+
+const handleSwipe = (function () {
+	let xCoords = [],
+		yCoords = [];
+	return function (e) {
+		if (resolving) return;
+		if (xCoords.length == 0) {
+			xCoords.push(e.changedTouches[0].pageX);
+			xCoords.push(e.changedTouches[0].pageY);
+		} else {
+			resolving = true;
+			yCoords.push(e.changedTouches[0].pageX);
+			yCoords.push(e.changedTouches[0].pageY);
+			let direction = getSwipeDirection(xCoords, yCoords);
+			if (direction == 'invalid') {
+				resolving = false;
+				xCoords = [];
+				yCoords = [];
+				return;
+			}
+			let newState = resolveBoard(BOARD, direction);
+			if (JSON.stringify(BOARD) == JSON.stringify(newState.newBoard)) {
+				resolving = false;
+				xCoords = [];
+				yCoords = [];
+				return;
+			}
+			newState.newBoard = addNewNumber(newState.newBoard);
+			updateState(newState);
+			// necessary before exit
+			xCoords = [];
+			yCoords = [];
+		}
+	};
+})();
 
 const getHighScore = (function () {
 	let highScore = localStorage.getItem('highScore');
@@ -226,6 +283,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	DIALOG = document.getElementById('prompt');
 
 	document.addEventListener('keydown', handleKeydown);
+	document.addEventListener('touchstart', handleSwipe);
+	document.addEventListener('touchend', handleSwipe);
 
 	startNewGame();
 });
@@ -311,7 +370,7 @@ const getDirection = function (code) {
 		return 'up';
 	} else if (code == 'ArrowDown') {
 		return 'down';
-	}
+	} else return 'invalid';
 };
 
 const getLeftResolvePath = function (board) {
