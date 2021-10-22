@@ -1,4 +1,5 @@
 :root {
+	--client-height: 0;
 	--grid-size: 300px;
 	--grid-columns: 4;
 }
@@ -16,8 +17,9 @@ body {
 	background-color: white;
 	width: auto;
 	height: 100vh;
-	min-height: 100vh;
+	min-height: var(--client-height);
 	position: relative;
+	overscroll-behavior: none;
 }
 button {
 	cursor: pointer;

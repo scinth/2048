@@ -9,6 +9,11 @@ var BOARD,
 var PREV_STATE = {};
 var DIALOG, RESET;
 
+document.documentElement.style.setProperty('--client-height', `${window.clientHeight}px`);
+window.onresize = () => {
+	document.documentElement.style.setProperty('--client-height', `${window.clientHeight}px`);
+};
+
 const reRender = function (state) {
 	let { newBoard, score, win } = state;
 	updateBoard(BOARD, newBoard);
@@ -34,7 +39,7 @@ const checkGameOver = function (board) {
 			return;
 		}
 	}
-	RESET = resetBoard('gameover');
+	RESET = resetBoard('gameOver');
 	RESET.next();
 	resolving = false;
 };
@@ -134,7 +139,7 @@ const resetBoard = function* (type) {
 		DIALOG.classList.remove('open');
 	};
 	button1.classList.add('continue');
-	if (type == 'gameover') {
+	if (type == 'gameOver') {
 		message.textContent = 'Game Over, no moves left';
 		button1.textContent = 'New Game';
 		button1.addEventListener('click', handleContinue);
