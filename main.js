@@ -9,9 +9,9 @@ var BOARD,
 var PREV_STATE = {};
 var DIALOG, RESET;
 
-document.documentElement.style.setProperty('--client-height', `${window.clientHeight}px`);
+document.documentElement.style.setProperty('--client-height', `${window.innerHeight}px`);
 window.onresize = () => {
-	document.documentElement.style.setProperty('--client-height', `${window.clientHeight}px`);
+	document.documentElement.style.setProperty('--client-height', `${window.innerHeight}px`);
 };
 
 const reRender = function (state) {
