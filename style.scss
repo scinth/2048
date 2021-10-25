@@ -16,7 +16,7 @@ body {
 	color: white;
 	background-color: white;
 	width: auto;
-	height: 100vh;
+	height: var(--client-height);
 	min-height: var(--client-height);
 	position: relative;
 	overscroll-behavior: none;
