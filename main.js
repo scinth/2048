@@ -70,7 +70,8 @@ const handleKeydown = function (e) {
 const getSwipeDirection = function (xCoords, yCoords) {
 	let xSwipe = xCoords[0] - yCoords[0];
 	let ySwipe = xCoords[1] - yCoords[1];
-	if (xSwipe == 0 && ySwipe == 0) return 'invalid';
+	let minSwipeLength = 80;
+	if (Math.abs(xSwipe) < minSwipeLength && Math.abs(ySwipe) < minSwipeLength) return 'invalid';
 	let swipe =
 		Math.abs(xSwipe) > Math.abs(ySwipe)
 			? {
