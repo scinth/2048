@@ -89,7 +89,10 @@ const handleSwipe = (function () {
 	let xCoords = [],
 		yCoords = [];
 	return function (e) {
-		if (resolving) return;
+		if (resolving) {
+			e.stopPropagation();
+			return;
+		}
 		if (xCoords.length == 0) {
 			xCoords.push(e.changedTouches[0].pageX);
 			xCoords.push(e.changedTouches[0].pageY);
@@ -102,6 +105,7 @@ const handleSwipe = (function () {
 				resolving = false;
 				xCoords = [];
 				yCoords = [];
+				e.stopPropagation();
 				return;
 			}
 			let newState = resolveBoard(BOARD, direction);
@@ -109,6 +113,7 @@ const handleSwipe = (function () {
 				resolving = false;
 				xCoords = [];
 				yCoords = [];
+				e.stopPropagation();
 				return;
 			}
 			newState.newBoard = addNewNumber(newState.newBoard);
@@ -116,6 +121,7 @@ const handleSwipe = (function () {
 			// necessary before exit
 			xCoords = [];
 			yCoords = [];
+			e.stopPropagation();
 		}
 	};
 })();
