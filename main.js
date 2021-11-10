@@ -102,18 +102,18 @@ const handleSwipe = (function () {
 			yCoords.push(e.changedTouches[0].pageY);
 			let direction = getSwipeDirection(xCoords, yCoords);
 			if (direction == 'invalid') {
-				resolving = false;
 				xCoords = [];
 				yCoords = [];
 				e.stopPropagation();
+				resolving = false;
 				return;
 			}
 			let newState = resolveBoard(BOARD, direction);
 			if (JSON.stringify(BOARD) == JSON.stringify(newState.newBoard)) {
-				resolving = false;
 				xCoords = [];
 				yCoords = [];
 				e.stopPropagation();
+				resolving = false;
 				return;
 			}
 			newState.newBoard = addNewNumber(newState.newBoard);
@@ -122,6 +122,7 @@ const handleSwipe = (function () {
 			xCoords = [];
 			yCoords = [];
 			e.stopPropagation();
+			resolving = false;
 		}
 	};
 })();
