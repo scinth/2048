@@ -123,7 +123,6 @@ const handleSwipe = (function () {
 			xCoords = [];
 			yCoords = [];
 			e.stopPropagation();
-			resolving = false;
 		}
 	};
 })();
