@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>2048</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="style.min.css" />
 		<script src="main.js"></script>
 	</head>
 	<body>
@@ -14,17 +14,84 @@
 				<div>
 					<h1 id="gameTitle">2048</h1>
 					<div class="action_btn">
-						<button id="prev">Prev</button>
+						<button id="undo">Undo</button>
 						<button id="reset">Reset</button>
 					</div>
 				</div>
 				<div class="score">
-					<p>High score:<br /><span id="high_score">0</span></p>
+					<p>Best:<br /><span id="high_score">0</span></p>
 					<p>Score:<br /><span id="current_score">0</span></p>
 				</div>
 			</header>
 			<div id="grid"></div>
+			<button id="about-toggler" type="button">?</button>
+			<footer>
+				<h6>Created by:</h6>
+				<p class="author">Rodniel G. Briones</p>
+			</footer>
 		</main>
+		<section id="about-section">
+			<section>
+				<h1>What is 2048?</h1>
+				<p>
+					2048 is a game created by an Italian developer
+					<a href="https://gabrielecirulli.com">Gabriele Cirulli</a> way back on 2014 based on
+					<a href="https://apps.apple.com/us/app/1024/id823499224">1024 by Veewo Studio</a>.
+				</p>
+			</section>
+			<section>
+				<h1>How to play?</h1>
+				<p>
+					Use Arrow-keys (<em>on desktop</em>) or swipe with your fingers up, down, left and right
+					(<em>on mobile</em>) to move the tiles. <br /><br />Two adjacent tiles with the same
+					values will merge (<em>with relevance to the direction of their movement</em>) into a
+					single tile containing their sum. <br /><br />Your goal is to reach the value
+					<strong>2048</strong>!. If you win the game you can choose to continue playing to reach a
+					higher value, the highest possible value is <strong>131072</strong> on a standard (4 x 4)
+					grid.
+				</p>
+			</section>
+			<section>
+				<h1>Struggling to win?</h1>
+				<h4>Tips:</h4>
+				<ol class="tips-list">
+					<li>Swipe left and right several times.</li>
+					<li>Build a higher tile in a corner.</li>
+					<li>Keep the row with the high tile filled.</li>
+					<li>Focus on combining small tiles.</li>
+					<li>Maneuver around small trapped tiles.</li>
+					<li>Move your corner tile when forced to, then return it.</li>
+					<li>Keep trying until you win.</li>
+				</ol>
+				<p class="wikihow-details">
+					Read the complete details on
+					<a href="https://www.google.com/amp/s/www.wikihow.com/Beat-2048%3famp=1">WikiHow</a>
+				</p>
+			</section>
+			<aside>
+				<h4>Note:</h4>
+				<p>
+					This is a revised version of the game.<br />If you wish to play the original version head
+					to <a href="https://play2048.co">https://play2048.co</a>
+				</p>
+			</aside>
+			<section>
+				<h1>Do you like this game?</h1>
+				<p>Download the original versions of the game</p>
+				<a
+					class="download-link"
+					href="https://apps.apple.com/us/app/2048-by-gabriele-
+cirulli/id868076805"
+					>Download on iOS</a
+				>
+				<a
+					class="download-link"
+					href="https://play.google.com/store/apps/details?
+id=com.gabrielecirulli.app2048"
+					>Download on Android</a
+				>
+			</section>
+		</section>
 		<div id="prompt">
 			<div class="card">
 				<p class="message">Prompt message here...</p>

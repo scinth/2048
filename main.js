@@ -1,6 +1,7 @@
 var updateBoard, updateScore, updateHighScore;
-var disablePrevBtn, enablePrevBtn;
+var disableUndoBtn, enableUndoBtn;
 var disableResetBtn, enableResetBtn;
+var aboutSection;
 var animateSlide;
 var resolving = false;
 var boardSize = 4;
@@ -9,9 +10,18 @@ var BOARD,
 var PREV_STATE = {};
 var DIALOG, RESET;
 
+const setGridSize = () => {
+	let maxWidth = 360;
+	let gridWidth = window.innerWidth * 0.8;
+	if (gridWidth > maxWidth) gridWidth = maxWidth;
+	document.documentElement.style.setProperty('--grid-size', `${gridWidth}px`);
+};
+
 document.documentElement.style.setProperty('--client-height', `${window.innerHeight}px`);
+setGridSize();
 window.onresize = () => {
 	document.documentElement.style.setProperty('--client-height', `${window.innerHeight}px`);
+	setGridSize();
 };
 
 const reRender = function (state) {
@@ -20,7 +30,7 @@ const reRender = function (state) {
 	SCORE += score;
 	updateScore(SCORE);
 	if (SCORE > getHighScore()) updateHighScore(SCORE);
-	enablePrevBtn();
+	enableUndoBtn();
 	enableResetBtn();
 	if (win) {
 		RESET = resetBoard('win');
@@ -51,6 +61,7 @@ const updateState = function (newState) {
 
 const handleKeydown = function (e) {
 	if (resolving) return;
+	if (aboutSection.classList.contains('show')) return;
 	resolving = true;
 	let direction = getDirection(e.key);
 	if (direction == 'invalid') {
@@ -94,6 +105,7 @@ const handleSwipe = (function () {
 			e.stopPropagation();
 			return;
 		}
+		if (aboutSection.classList.contains('show')) return;
 		if (xCoords.length == 0) {
 			xCoords.push(e.changedTouches[0].pageX);
 			xCoords.push(e.changedTouches[0].pageY);
@@ -183,7 +195,7 @@ const resetBoard = function* (type) {
 	updateBoard(BOARD, newBoard);
 	updateScore(SCORE);
 	PREV_STATE = {};
-	disablePrevBtn();
+	disableUndoBtn();
 	disableResetBtn();
 	resolving = false;
 };
@@ -193,11 +205,16 @@ const setPreviousState = function () {
 	updateBoard(BOARD, board);
 	SCORE = score;
 	updateScore(score);
-	disablePrevBtn();
+	disableUndoBtn();
 	PREV_STATE = {};
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+	let aboutToggler = document.getElementById('about-toggler');
+	aboutSection = document.getElementById('about-section');
+	aboutToggler.addEventListener('click', () => {
+		aboutSection.classList.toggle('show');
+	});
 	BOARD = generateBoard(boardSize);
 	BOARD = addNewNumber(BOARD);
 	renderBoard(BOARD);
@@ -279,16 +296,16 @@ document.addEventListener('DOMContentLoaded', function () {
 			},
 		];
 	})();
-	[enablePrevBtn, disablePrevBtn] = (function () {
-		let prevButton = document.getElementById('prev');
-		prevButton.addEventListener('click', () => setPreviousState());
-		prevButton.disabled = true;
+	[enableUndoBtn, disableUndoBtn] = (function () {
+		let undoButton = document.getElementById('undo');
+		undoButton.addEventListener('click', () => setPreviousState());
+		undoButton.disabled = true;
 		return [
 			function () {
-				if (prevButton.disabled) prevButton.disabled = false;
+				if (undoButton.disabled) undoButton.disabled = false;
 			},
 			function () {
-				prevButton.disabled = true;
+				undoButton.disabled = true;
 			},
 		];
 	})();

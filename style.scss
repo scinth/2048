@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Sigmar+One&display=swap');
 :root {
 	--client-height: 0;
-	--grid-size: 300px;
+	--grid-size: 0;
 	--grid-columns: 4;
 }
 * {
@@ -10,29 +11,50 @@
 }
 html {
 	font-size: 1rem;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Quicksand', Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-	color: white;
-	background-color: white;
-	width: auto;
+	color: #ffffff;
+	background-color: #333333;
+	width: 100vw;
 	height: var(--client-height);
 	min-height: var(--client-height);
 	position: relative;
 	overscroll-behavior: none;
 }
+h1,
+h2,
+h3 {
+	font-family: 'Sigmar One', cursive;
+	color: #dddddd;
+}
+.tips-list {
+	list-style-type: number;
+	text-align: left;
+	margin-left: 50px;
+
+	li {
+		&:nth-child(odd) {
+			background-color: #272727;
+		}
+		&:nth-child(even) {
+			background-color: #222222;
+		}
+	}
+}
 button {
 	cursor: pointer;
 	padding: 1rem 1.3rem;
 }
+
 main {
 	width: 100%;
 	height: 100%;
-	background-color: #333;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 
 	> * {
 		margin: 0.5rem;
@@ -45,15 +67,17 @@ main {
 
 		#gameTitle {
 			text-align: center;
-			color: #999;
+			color: #999999;
 			padding-top: 1em;
 		}
 
 		.action_btn {
 			display: flex;
 			justify-content: center;
+
 			button {
-				color: #fff;
+				font-weight: bold;
+				color: #eeeeee;
 				background: linear-gradient(#24cf24, #0ab10a);
 				margin: 0.5rem 0.3rem 0;
 				border: none;
@@ -72,7 +96,7 @@ main {
 
 		.score p {
 			min-width: 150px;
-			color: #333;
+			color: #333333;
 			background-color: #f1ce9f;
 			border: 3px solid #e09128;
 			border-radius: 7px;
@@ -96,85 +120,143 @@ main {
 
 		.cell {
 			border-radius: 10px;
-			background-color: #444;
+			background-color: #444444;
 
-			& > div {
+			> div {
 				width: 100%;
 				height: 100%;
-				font-weight: bold;
+				font-family: 'Sigmar One', cursive;
+				font-size: 1.3em;
+				color: #ffffffdd;
 				border-radius: inherit;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				transition: transform 0.25s ease;
 
-				&.color2 {
-					background-color: hsl(0, 58%, 56%);
-				}
-				&.color4 {
-					background-color: hsl(17, 58%, 56%);
-				}
-				&.color8 {
-					background-color: hsl(34, 58%, 56%);
-				}
-				&.color16 {
-					background-color: hsl(51, 58%, 56%);
-				}
-				&.color32 {
-					background-color: hsl(68, 58%, 56%);
-				}
-				&.color64 {
-					background-color: hsl(85, 58%, 56%);
-				}
-				&.color128 {
-					background-color: hsl(102, 58%, 56%);
-				}
-				&.color256 {
-					background-color: hsl(119, 58%, 56%);
-				}
-				&.color512 {
-					background-color: hsl(136, 58%, 56%);
-				}
-				&.color1024 {
-					background-color: hsl(153, 58%, 56%);
-				}
-				&.color2048 {
-					background-color: hsl(170, 58%, 56%);
-				}
-				&.color4096 {
-					background-color: hsl(187, 58%, 56%);
-				}
-				&.color8192 {
-					background-color: hsl(204, 58%, 56%);
-				}
-				&.color16384 {
-					background-color: hsl(221, 58%, 56%);
-				}
-				&.color32768 {
-					background-color: hsl(238, 58%, 56%);
-				}
-				&.color65536 {
-					background-color: hsl(255, 58%, 56%);
-				}
-				&.color131072 {
-					background-color: hsl(272, 58%, 56%);
+				$value: 2;
+				$hue: 0;
+				@while $value <= 131072 {
+					&.color#{$value} {
+						background-color: hsl($hue, 58%, 56%);
+					}
+					$value: $value + $value;
+					$hue: $hue + 17;
 				}
 			}
 		}
 	}
+
+	#about-toggler {
+		font-family: 'Sigmar One', cursive;
+		color: #ffffff;
+		background-color: #4ed0baaa;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60px;
+		height: 60px;
+		border: none;
+		border-radius: 50%;
+		z-index: 1;
+	}
+
+	footer {
+		font-size: 1.2em;
+		color: #afafaf;
+		text-align: center;
+		h6 {
+			padding-top: 1.5em;
+		}
+	}
+}
+
+#about-section {
+	font-size: 1.2em;
+	overflow-y: scroll;
+	text-align: center;
+	position: absolute;
+	inset: 0;
+	background-color: #333333cc;
+	display: none;
+
+	&.show {
+		display: block;
+	}
+
+	&::-webkit-scrollbar {
+		background-color: #444444;
+		max-width: 10px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #ffffff;
+	}
+
+	> * {
+		margin: 2em auto;
+		max-width: 1000px;
+	}
+
+	aside {
+		font-size: 0.9em;
+		text-align: left;
+		background-color: #241803;
+		border-left: 3px solid #ffa500;
+	}
+
+	h1 {
+		font-size: 2.5em;
+		padding: 0.8em 1em;
+	}
+	h4 {
+		padding: 0.8em 1em;
+	}
+	p {
+		padding: 1.5em;
+		padding-top: 0;
+		line-height: 2em;
+		color: #dddddd;
+	}
+	li {
+		padding: 1em;
+		line-height: 1em;
+		color: #cccccc;
+	}
+	a.download-link,
+	.wikihow-details {
+		font-size: 1.2em;
+		padding: 1em 1.2em;
+	}
+	a.download-link {
+		display: inline-block;
+		background-color: #000000;
+		border-radius: 0.3em;
+		margin: 1em;
+	}
+	a {
+		color: #4ed0ba;
+		font-weight: bold;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	em {
+		font-weight: initial;
+	}
 }
 
 #prompt {
-	width: 100%;
-	min-height: 100vh;
 	border: none;
-	background-color: #5555;
+	background-color: #55555555;
 	display: none;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: 0;
-	left: 0;
+	inset: 0;
+	z-index: 2;
 
 	&.open {
 		display: flex;
@@ -183,11 +265,11 @@ main {
 	.card {
 		width: 80vw;
 		max-width: 600px;
-		background-color: white;
+		background-color: #ffffff;
 		border-radius: 1.5em;
 
 		.message {
-			color: #333;
+			color: #333333;
 			font-size: 1.5em;
 			padding: 1em;
 		}
@@ -205,7 +287,7 @@ main {
 				border-radius: 0.5em;
 
 				&.continue {
-					color: white;
+					color: #ffffff;
 					background: linear-gradient(#e09128, #ca8d3e);
 				}
 			}
