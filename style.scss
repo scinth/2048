@@ -28,18 +28,22 @@ h3 {
 	font-family: 'Sigmar One', cursive;
 	color: #dddddd;
 }
+.help_icon {
+	width: inherit;
+	height: inherit;
+}
 .tips-list {
 	list-style-type: number;
+	list-style-position: inside;
+	max-width: max-content;
 	text-align: left;
-	margin-left: 50px;
+	margin: 0 auto;
 
-	li {
-		&:nth-child(odd) {
-			background-color: #272727;
-		}
-		&:nth-child(even) {
-			background-color: #222222;
-		}
+	li:nth-child(odd) {
+		background-color: #585858;
+	}
+	li:nth-child(even) {
+		background-color: #505050;
 	}
 }
 button {
@@ -148,8 +152,7 @@ main {
 	}
 
 	#about-toggler {
-		font-family: 'Sigmar One', cursive;
-		color: #ffffff;
+		padding: 0;
 		background-color: #4ed0baaa;
 		position: absolute;
 		top: 0;
@@ -163,7 +166,7 @@ main {
 
 	footer {
 		font-size: 1.2em;
-		color: #afafaf;
+		color: #999999;
 		text-align: center;
 		h6 {
 			padding-top: 1.5em;
@@ -195,13 +198,14 @@ main {
 
 	> * {
 		margin: 2em auto;
-		max-width: 1000px;
+		max-width: 800px;
 	}
 
-	aside {
+	.note {
 		font-size: 0.9em;
 		text-align: left;
 		background-color: #241803;
+		max-width: max-content;
 		border-left: 3px solid #ffa500;
 	}
 
@@ -230,18 +234,19 @@ main {
 	}
 	a.download-link {
 		display: inline-block;
+		text-decoration: none;
 		background-color: #000000;
 		border-radius: 0.3em;
 		margin: 1em;
-	}
-	a {
-		color: #4ed0ba;
-		font-weight: bold;
-		text-decoration: none;
 
 		&:hover {
 			text-decoration: underline;
 		}
+	}
+	a {
+		color: #4ed0ba;
+		font-weight: bold;
+		text-decoration: underline;
 	}
 	em {
 		font-weight: initial;

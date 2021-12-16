@@ -41,7 +41,7 @@ const reRender = function (state) {
 const checkGameOver = function (board) {
 	let directions = ['up', 'right', 'down', 'left'];
 	let boardString = JSON.stringify(board);
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < boardSize; i++) {
 		let dir = directions[i];
 		let { newBoard } = resolveBoard(board, dir);
 		if (boardString != JSON.stringify(newBoard)) {
@@ -212,8 +212,17 @@ const setPreviousState = function () {
 document.addEventListener('DOMContentLoaded', function () {
 	let aboutToggler = document.getElementById('about-toggler');
 	aboutSection = document.getElementById('about-section');
+	let undo_btn = document.getElementById('undo');
+	let reset_btn = document.getElementById('reset');
 	aboutToggler.addEventListener('click', () => {
 		aboutSection.classList.toggle('show');
+		if (aboutSection.classList.contains('show')) {
+			undo_btn.tabIndex = '-1';
+			reset_btn.tabIndex = '-1';
+		} else {
+			undo_btn.tabIndex = '1';
+			reset_btn.tabIndex = '2';
+		}
 	});
 	BOARD = generateBoard(boardSize);
 	BOARD = addNewNumber(BOARD);
