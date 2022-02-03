@@ -1,3 +1,5 @@
+import './style.scss';
+
 var updateBoard, updateScore, updateHighScore;
 var disableUndoBtn, enableUndoBtn;
 var disableResetBtn, enableResetBtn;
@@ -41,7 +43,7 @@ const reRender = function (state) {
 const checkGameOver = function (board) {
 	let directions = ['up', 'right', 'down', 'left'];
 	let boardString = JSON.stringify(board);
-	for (i = 0; i < boardSize; i++) {
+	for (let i = 0; i < boardSize; i++) {
 		let dir = directions[i];
 		let { newBoard } = resolveBoard(board, dir);
 		if (boardString != JSON.stringify(newBoard)) {
