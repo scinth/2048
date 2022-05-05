@@ -51,6 +51,7 @@ module.exports = {
 				removeComments: true,
 				collapseWhitespace: true,
 			},
+			favicon: './src/icons/favicon.ico',
 		}),
 		new MiniCssExtractPlugin({
 			filename: 'style-[contenthash].min.css',

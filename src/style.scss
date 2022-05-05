@@ -117,8 +117,11 @@ main {
 
 	#grid {
 		--size: calc(var(--grid-size) / var(--grid-columns));
+		display: -ms-grid;
 		display: grid;
+		-ms-grid-columns: repeat(var(--grid-columns), var(--size));
 		grid-template-columns: repeat(var(--grid-columns), var(--size));
+		-ms-grid-rows: repeat(var(--grid-columns), var(--size));
 		grid-template-rows: repeat(var(--grid-columns), var(--size));
 		grid-gap: 8px;
 
