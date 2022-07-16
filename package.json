@@ -1,7 +1,7 @@
 {
 	"name": "2048",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A number-matching puzzle game",
 	"main": "src/index.js",
 	"scripts": {
 		"start": "webpack serve --config webpack.dev.js --open",
@@ -9,7 +9,7 @@
 	},
 	"keywords": [],
 	"author": "Briones R.",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
 		"@babel/runtime": "^7.17.0"
 	},
