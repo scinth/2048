@@ -2,7 +2,7 @@
 
 # 2048 Game
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs) [![Netlify Status](https://api.netlify.com/api/v1/badges/43bf792a-bae7-4efb-a132-d1f637fb42fe/deploy-status)](https://app.netlify.com/sites/nielbriones2048/deploys)
 
 Number-matching puzzle game with animations
 
